@@ -1,0 +1,12 @@
+--type-add=ruby=.haml,.rake
+--type-add=css=.sass,.scss
+--type-set=tags=tags
+--type-set=cucumber=.feature
+--type-set=mymake=.mk
+--notags
+--noxml
+--ignore-dir=tmp
+--ignore-dir=temp
+--ignore-dir=coverage
+--ignore-dir=vendor
+--smart-case
