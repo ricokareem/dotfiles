@@ -1,0 +1,16 @@
+[user]
+	name = Rico Rodriquez Collins
+	email = rico.collins@mac.com
+[core]
+	editor = /usr/bin/vim 
+  autocrlf = input
+  safecrlf = false
+	excludesfile = /Users/rico/.gitignore_global
+[push]
+  default = tracking
+[color]
+  ui = true
+[alias]
+  st = status -sb
+  ci = commit
+  co = checkout
