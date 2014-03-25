@@ -32,9 +32,11 @@ export EDITOR="/usr/local/bin/atom"
 #GIT FUNCTIONALITY AND HELPERS
 
   #GIT COMPLETION
+  #From https://github.com/git/git/tree/master/contrib/completion
   source ~/.git-completion
 
   #GIT-FLOW COMPLETION
+  #From https://github.com/bobthecow/git-flow-completion
   source ~/.git-flow-completion
 
 
