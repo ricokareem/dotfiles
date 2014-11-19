@@ -1,16 +1,23 @@
 [user]
-	name = Rico Rodriquez Collins
-	email = rico.collins@mac.com
+  name = Rico Rodriquez Collins
+  email = rico.collins@mac.com
 [core]
-	editor = /usr/bin/vim 
   autocrlf = input
   safecrlf = false
-	excludesfile = /Users/rico/.gitignore_global
+  excludesfile = /Users/rcollins/.gitignore_global
 [push]
   default = tracking
 [color]
   ui = true
 [alias]
-  st = status -sb
-  ci = commit
+# st = status -sb
+  st = status
+  cp = cherry-pick
   co = checkout
+  ci = commit
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  lp = log -p
+[merge]
+  conflictstyle = diff3
+[rerere]
+  enabled = 0

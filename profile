@@ -2,14 +2,22 @@
 alias ls='ls -FG'
 alias hgrep='history | grep $1'
 
-# export PATH=~/bin:.rvm/bin:/opt/local/bin:/opt/local/sbin:/Users/rcollins/.gem/ruby/1.8/bin:$PATH
-export PATH=/opt/local/bin:/usr/local/sbin:/usr/local/bin:~/bin:.rvm/bin:$PATH
+
+# export PATH=~/bin:.rvm/bin:/opt/local/bin:/opt/local/sbin:$HOME/.gem/ruby/1.8/bin:$PATH
+# export PATH=$HOME/.rvm/gems/ruby-1.9.2-p320@angularspace:$PATH
+export PATH=/usr/local/go/bin:/opt/local/bin:/usr/local/sbin:/usr/local/bin:~/bin:.rvm/bin:$PATH
+
+#GO PROGRAMMING STUFF
+export GOPATH='$HOME/workspace/go'
+export PATH=$PATH:$GOPATH/bin
+#export DOCKER_HOST=tcp://$(boot2docker ip):2375
+export JIRA_HOST="jira.yp.com"
 
 
 #DEVELOPER SHORTS
-alias sc='WTF=true script/server --debugger'
-alias nolocal='mv config/yacht/local.yml config/yacht/local.yml.bak'
-alias relocal='mv config/yacht/local.yml.bak config/yacht/local.yml'
+alias wtf='WTF=true script/server --debugger'
+alias workspace='cd ~/workspace'
+alias labswork='cd ~/workspace/go/src/github.com'
 
 #RVM Env
 alias rvm-doctor='rvm requirements'
@@ -22,9 +30,7 @@ alias rvmge='rvm gemset empty'
 
 
 #EDITORS
-#export EDITOR="/usr/local/bin/mate -w"
-#export EDITOR="/usr/bin/vim"
-export EDITOR="/usr/local/bin/atom"
+export EDITOR='/usr/bin/vim'
 
 #VIM
 # source ~/.vim/vimrc
@@ -33,17 +39,19 @@ export EDITOR="/usr/local/bin/atom"
 
   #GIT COMPLETION
   #From https://github.com/git/git/tree/master/contrib/completion
-  source ~/.git-completion
+  # DISABLING -> MOVED TO ZSH
+  #source ~/.git-completion
 
   #GIT-FLOW COMPLETION
   #From https://github.com/bobthecow/git-flow-completion
-  source ~/.git-flow-completion
+  # DISABLING -> MOVED TO ZSH
+  #source ~/.git-flow-completion
 
 
 # COLOR DEFINITIONS
         RED="\[\033[0;31m\]"
      YELLOW="\[\033[0;33m\]"
- 	  GREEN="\[\033[0;32m\]"
+    GREEN="\[\033[0;32m\]"
        BLUE="\[\033[0;34m\]"
   LIGHT_RED="\[\033[1;31m\]"
 LIGHT_GREEN="\[\033[1;32m\]"
@@ -59,7 +67,7 @@ function parse_git_branch {
   branch_pattern="^On branch ([^${IFS}]*)"
   remote_pattern="Your branch is (.*) of"
   diverge_pattern="Your branch and (.*) have diverged"
-  if [[ ! ${git_status}} =~ "working directory clean" ]]; then
+  if [[ ! ${git_status} =~ "working directory clean" ]]; then
     state="${RED}⚡"
   fi
   # add an else if or two here if you want to get more specific
