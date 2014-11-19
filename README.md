@@ -8,6 +8,6 @@ Organizing shell environments
 
 Switch to ZSH & Install Oh My ZSH
 --------------------------------
-1.  `chsh -s /bin/zsh
+1.  `chsh -s /bin/zsh`
 2.  `curl -L http://install.ohmyz.sh | sh`
 
