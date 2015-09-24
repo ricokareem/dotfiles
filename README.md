@@ -4,7 +4,9 @@ Dot Files
 Organizing shell environments
 --------------------------------
 1.  check out branch
-2.  rename files and directories on top-level (add "." prefix)
+2.  rename files and directories on top-level (add "." prefix) to make:
+    - .gitconfig
+    - .zshrc
 
 ```
 For .zshrc, you may want to use FileMerge App to compare and merge
