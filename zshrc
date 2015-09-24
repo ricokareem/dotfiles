@@ -52,13 +52,7 @@ ZSH_THEME="robbyrussell"
 plugins=(git)
 
 # User configuration
-
-# When using GO
-# export PATH="$PATH:/usr/local/go/bin:/opt/local/bin:/usr/local/sbin:/usr/local/bin:$HOME/bin:.rvm/bin:$HOME/.rvm/gems/ruby-1.9.2-p320@angularspace:$HOME/.rvm/gems/ruby-1.9.2-p320/bin:$HOME/.rvm/gems/ruby-1.9.2-p320@global/bin:$HOME/.rvm/rubies/ruby-1.9.2-p320/bin:$HOME/.rvm/bin:/usr/local/go/bin:/opt/local/bin:/usr/local/sbin:/usr/local/bin:$HOME/bin:/usr/local/go/bin:/opt/local/bin:/usr/local/sbin:/usr/local/bin:$HOME/bin:/usr/local/go/bin:/opt/local/bin:/usr/local/sbin:/usr/local/bin:$HOME/bin:/usr/local/go/bin:/opt/local/bin:/usr/local/sbin:/usr/local/bin:$HOME/bin:/usr/local/go/bin:/opt/local/bin:/usr/local/sbin:/usr/local/bin:$HOME/bin:/usr/local/go/bin:/opt/local/bin:/usr/local/sbin:/usr/local/bin:$HOME/bin:/usr/local/go/bin:/opt/local/bin:/usr/local/sbin:/usr/local/bin:$HOME/bin:$HOME/.bashish/launcher:/usr/local/share/bashish/lib:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/git/bin:/usr/local/go/bin:/usr/local/munki:$HOME/workspace/go/bin:$HOME/workspace/go/bin:$HOME/workspace/go/bin:$HOME/workspace/go/bin:$HOME/workspace/go/bin:$HOME/workspace/go/bin:$HOME/workspace/go/bin:$HOME/workspace/go/bin:$HOME/.rvm/bin:$HOME/workspace/go/bin:$HOME/.rvm/bin"
-
-# Otherwise
-export PATH="$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/git/bin:/usr/local/munki:/Users/rcollins/.rvm/bin"
-
+export PATH="$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/local/munki"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -87,3 +81,8 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+export NVM_DIR="/Users/rcollins/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
