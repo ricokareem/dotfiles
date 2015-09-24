@@ -1,6 +1,3 @@
-[user]
-  name = Rico Rodriquez Collins
-  email = rico.collins@mac.com
 [core]
   autocrlf = input
   safecrlf = false
