@@ -7,7 +7,9 @@ Organizing shell environments
 2.  rename files and directories on top-level (add "." prefix)
 
 ```
-For .zshrc, you may want to use FileMerge App to compare and merge updates from the latest version of oh-my-zshrc with the aliases and values in this file.
+For .zshrc, you may want to use FileMerge App to compare and merge
+updates from the latest version of oh-my-zshrc with the aliases
+and values in this file.
 ```
 
 Switch to ZSH & Install dependencies
