@@ -15,5 +15,6 @@
     // "color_scheme": "Packages/Seti_UI/Scheme/Seti.tmTheme",
     "theme": "predawn.sublime-theme",
     "color_scheme": "Packages/Predawn/predawn.tmTheme",
+    "predawn_tabs_active_underline": true,
     "bold_folder_labels": true
 }
