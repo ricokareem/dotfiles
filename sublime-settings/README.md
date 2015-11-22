@@ -4,3 +4,26 @@
 
 3.  Copy Preferences.sublime-settings
   to ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/
+
+
+**** PLUGIN LIST ****
+AutoFileName
+Babel
+Emmet
+Emmet Css Snippets
+Git
+GitGutter
+HTML-CSS-JS Prettify
+Jade
+JSHint Gutter
+JSX
+LESS
+Origami
+Package Control
+Path Tools
+Predawn
+Pretty JSON
+ReactJS
+SublimeLinter
+Trimmer
+
