@@ -7,23 +7,41 @@
 
 
 **** PLUGIN LIST ****
-AutoFileName
-Babel
-Emmet
-Emmet Css Snippets
-Git
-GitGutter
-HTML-CSS-JS Prettify
-Jade
-JSHint Gutter
-JSX
-LESS
-Origami
-Package Control
-Path Tools
-Predawn
-Pretty JSON
-ReactJS
-SublimeLinter
-Trimmer
 
+AutoFileName
+
+Babel
+
+Emmet
+
+Emmet Css Snippets
+
+Git
+
+GitGutter
+
+HTML-CSS-JS Prettify
+
+Jade
+
+JSHint Gutter
+
+JSX
+
+LESS
+
+Origami
+
+Package Control
+
+Path Tools
+
+Predawn
+
+Pretty JSON
+
+ReactJS
+
+SublimeLinter
+
+Trimmer
