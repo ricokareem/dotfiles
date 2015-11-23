@@ -2,12 +2,15 @@
     "color_scheme": "Packages/User/SublimeLinter/predawn (SL).tmTheme",
     "ensure_newline_at_eof_on_save": true,
     "font_size": 20,
+    "highlight_line": true,
+    "highlight_modified_tabs": true,
     "ignored_packages":
     [
         "Vintage"
     ],
     "predawn_sidebar_xlarge": true,
     "predawn_tabs_active_underline": true,
+    "tab_size": 4,
     "theme": "predawn-DEV.sublime-theme",
     "translate_tabs_to_spaces": true,
     "trim_trailing_white_space_on_save": true
