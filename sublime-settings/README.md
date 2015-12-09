@@ -12,6 +12,8 @@ AutoFileName
 
 Babel
 
+Copy Relative Path
+
 Emmet
 
 Emmet Css Snippets
@@ -33,8 +35,6 @@ LESS
 Origami
 
 Package Control
-
-Path Tools
 
 Predawn
 
