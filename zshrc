@@ -86,6 +86,8 @@ source $ZSH/oh-my-zsh.sh
 alias list-emulator-images="./platforms/ios/cordova/lib/list-emulator-images"
 alias ypu="cd ~/workspace/consumer/yp"
 alias ypm="cd ~/workspace/consumer/ypm-core"
+alias admin3="cd ~/workspace/ricokareem/admin3"
+alias admin2="cd ~/workspace/consumer/admin2"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
