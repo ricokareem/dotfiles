@@ -88,6 +88,7 @@ alias ypu="cd ~/workspace/consumer/yp"
 alias ypm="cd ~/workspace/consumer/ypm-core"
 alias admin3="cd ~/workspace/ricokareem/admin3"
 alias admin2="cd ~/workspace/consumer/admin2"
+alias ricokareem="cd ~/workspace/ricokareem"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
