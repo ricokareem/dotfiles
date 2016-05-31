@@ -1,7 +1,7 @@
 {
     "color_scheme": "Packages/Predawn/predawn.tmTheme",
     "ensure_newline_at_eof_on_save": true,
-    "font_size": 20,
+    "font_size": 14,
     "highlight_line": true,
     "highlight_modified_tabs": true,
     "ignored_packages":
