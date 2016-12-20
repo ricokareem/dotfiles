@@ -90,6 +90,8 @@ alias admin3="cd ~/workspace/ricokareem/admin3"
 alias admin2="cd ~/workspace/consumer/admin2"
 alias ricokareem="cd ~/workspace/ricokareem"
 
+alias gti="git pull && git remote prune origin && prunedevelop"
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 export PATH="$HOME/.rbenv/bin:$PATH"
