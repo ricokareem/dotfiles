@@ -91,6 +91,9 @@ alias admin2="cd ~/workspace/consumer/admin2"
 alias ricokareem="cd ~/workspace/ricokareem"
 
 alias gti="git pull && git remote prune origin && prunedevelop"
+function mochatest() {
+  NODE_PATH=. mocha "$1"
+}
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
