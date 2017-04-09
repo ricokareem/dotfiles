@@ -100,6 +100,12 @@ export NVM_DIR="$HOME/.nvm"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
+# # Android/ Cordova path update
+# export ANDROID_HOME=/Users/rico/Library/Android/sdk
+# export PATH=${PATH}:/Users/rico/Library/Android/sdk/platform-tools:/Users/rico/Library/Android/sdk/tools
+# export ORG_GRADLE_PROJECT_cdvMinSdkVersion=20
+
+
 # place this after nvm initialization!
 autoload -U add-zsh-hook
 load-nvmrc() {
