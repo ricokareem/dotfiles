@@ -21,3 +21,7 @@ Switch to ZSH & Install dependencies
 3.  Install rbenv [https://github.com/sstephenson/rbenv]
 4.  Install Node Version Manager NVM [https://github.com/creationix/nvm]
 
+ZSH iTerm Styling
+--------------------------------
+Cobalt 2 - https://github.com/wesbos/Cobalt2-iterm.git
+
