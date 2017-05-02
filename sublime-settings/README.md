@@ -36,6 +36,8 @@ Origami
 
 Package Control
 
+Path Tools
+
 Predawn
 
 Pretty JSON
@@ -43,5 +45,7 @@ Pretty JSON
 ReactJS
 
 SublimeLinter
+
+Theme - Cobalt2
 
 Trimmer
