@@ -87,6 +87,7 @@ source $ZSH/oh-my-zsh.sh
 alias list-emulator-images="./platforms/ios/cordova/lib/list-emulator-images"
 alias ypu="cd ~/workspace/consumer/yp"
 alias ypm="cd ~/workspace/consumer/ypm-core"
+alias mobyp="cd ~/workspace/consumer/mobyp"
 alias admin3="cd ~/workspace/ricokareem/admin3"
 alias admin2="cd ~/workspace/consumer/admin2"
 alias ricokareem="cd ~/workspace/ricokareem"
