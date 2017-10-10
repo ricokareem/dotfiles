@@ -54,7 +54,8 @@ ZSH_THEME="cobalt2"
 plugins=(git bundler osx rake ruby)
 
 # User configuration
-export PATH="$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/local/munki"
+
+export PATH="$PATH:$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.rvm/bin:./node_modules/.bin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -85,13 +86,6 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias list-emulator-images="./platforms/ios/cordova/lib/list-emulator-images"
-alias ypu="cd ~/workspace/consumer/yp"
-alias ypm="cd ~/workspace/consumer/ypm-core"
-alias mobyp="cd ~/workspace/consumer/mobyp"
-alias admin3="cd ~/workspace/ricokareem/admin3"
-alias admin2="cd ~/workspace/consumer/admin2"
-alias ricokareem="cd ~/workspace/ricokareem"
-
 alias gti="git pull && git remote prune origin && prunedevelop"
 function mochatest() {
   NODE_PATH=. mocha "$1"
@@ -99,13 +93,13 @@ function mochatest() {
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+# export PATH="$HOME/.rbenv/bin:$PATH"
+# eval "$(rbenv init -)"
 
-# # Android/ Cordova path update
-# export ANDROID_HOME=/Users/rico/Library/Android/sdk
-# export PATH=${PATH}:/Users/rico/Library/Android/sdk/platform-tools:/Users/rico/Library/Android/sdk/tools
-# export ORG_GRADLE_PROJECT_cdvMinSdkVersion=20
+# Android/ Cordova path update
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$HOME/Library/Android/sdk/platform-tools:$HOME/Library/Android/sdk/tools
+export ORG_GRADLE_PROJECT_cdvMinSdkVersion=20
 
 
 # place this after nvm initialization!
@@ -130,3 +124,6 @@ load-nvmrc
 
 # VSCODE
 code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
+
+# python and anaconda
+export PATH=$PATH:$HOME/anaconda2/bin
