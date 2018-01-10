@@ -127,3 +127,6 @@ code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
 
 # python and anaconda
 export PATH=$PATH:$HOME/anaconda2/bin
+
+# dart and pub
+export PATH="$PATH":"~/.pub-cache/bin"
