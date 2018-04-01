@@ -133,7 +133,10 @@ load-nvmrc
 code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
 
 # python and anaconda
-export PATH=$PATH:$HOME/anaconda2/bin
+# export PATH=$PATH:$HOME/anaconda2/bin
 
 # dart and pub
 export PATH=$PATH:$HOME/.pub-cache/bin
+
+# capybara-webkit
+export PATH="$(brew --prefix qt@5.5)/bin:$PATH"
