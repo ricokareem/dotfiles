@@ -1,20 +1,21 @@
 [core]
-  autocrlf = input
-  safecrlf = false
-  excludesfile = $HOME/.gitignore_global
+	editor = /usr/bin/vi
+	autocrlf = input
+	safecrlf = false
+	excludesfile = /Users/rico/.gitignore_global
 [push]
   default = tracking
 [color]
   ui = true
 [alias]
-# st = status -sb
   st = status
   cp = cherry-pick
   co = checkout
-  ci = commit
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   lp = log -p
-[merge]
+	dci = duet-commit
+	ada = add -p
+  [merge]
   conflictstyle = diff3
 [rerere]
   enabled = 0
