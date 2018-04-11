@@ -1,8 +1,8 @@
 [core]
-	editor = /usr/bin/vi
-	autocrlf = input
-	safecrlf = false
-	excludesfile = /Users/rico/.gitignore_global
+  editor = /usr/bin/vi
+  autocrlf = input
+  safecrlf = false
+  excludesfile = /Users/rico/.gitignore_global
 [push]
   default = tracking
 [color]
@@ -13,9 +13,9 @@
   co = checkout
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   lp = log -p
-	dci = duet-commit
-	ada = add -p
-  [merge]
+  dci = duet-commit
+  ada = add -p
+[merge]
   conflictstyle = diff3
 [rerere]
   enabled = 0
