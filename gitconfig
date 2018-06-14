@@ -15,6 +15,7 @@
   lp = log -p
   dci = duet-commit
   ada = add -p
+	local-branches = !git branch -vv | grep -v origin
 [merge]
   conflictstyle = diff3
 [rerere]
