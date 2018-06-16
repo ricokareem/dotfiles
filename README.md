@@ -25,3 +25,8 @@ ZSH iTerm Styling
 --------------------------------
 Cobalt 2 - https://github.com/wesbos/Cobalt2-iterm.git
 
+VSCode
+--------------------------------
+using [vscode-alternate extension](https://marketplace.visualstudio.com/items?itemName=will-wow.vscode-alternate-file) from [@WowItsWillWow](https://twitter.com/WowItsWillWow)
+rename `projections.json` to `.projections.json` and put in the root directory of projects
+
