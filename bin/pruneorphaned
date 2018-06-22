@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [[ "$1" != "" ]]; then
+    BASEBRANCH="$1"
+else
+    BASEBRANCH="development"
+fi
+
+git remote prune origin
+echo "Base Branch: ${BASEBRANCH}"
+git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -d
+
