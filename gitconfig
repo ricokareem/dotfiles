@@ -15,7 +15,9 @@
   lp = log -p
   dci = duet-commit
   ada = add -p
-	orphan-branches = !git branch -vv | grep ': gone]' | awk '{print $1}'
+	find-orphan-branches = !git branch -vv | grep ': gone]' | awk '{print $1}'
+	prune-orphan-branches = !git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -D
+
 [merge]
   conflictstyle = diff3
 [rerere]
