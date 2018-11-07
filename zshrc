@@ -93,50 +93,36 @@ export PATH="$PATH:$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias list-emulator-images="./platforms/ios/cordova/lib/list-emulator-images"
-alias gti="git pull && git remote prune origin && prunedevelop"
+
 function mochatest() {
   NODE_PATH=. mocha "$1"
 }
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-# export PATH="$HOME/.rbenv/bin:$PATH"
-# eval "$(rbenv init -)"
 
 # Android/ Cordova path update
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$HOME/Library/Android/sdk/platform-tools:$HOME/Library/Android/sdk/tools
 export ORG_GRADLE_PROJECT_cdvMinSdkVersion=20
 
-
-# place this after nvm initialization!
-autoload -U add-zsh-hook
-load-nvmrc() {
-  local node_version="$(nvm version)"
-  local nvmrc_path="$(nvm_find_nvmrc)"
-
-  if [ -n "$nvmrc_path" ]; then
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-
-    if [ "$nvmrc_node_version" != "N/A" ] && [ "$nvmrc_node_version" != "$node_version" ]; then
-      nvm use
-    fi
-  elif [ "$node_version" != "$(nvm version default)" ]; then
-    echo "Reverting to nvm default version"
-    nvm use default
-  fi
-}
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
-
 # VSCODE
 code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
 
-# python and anaconda
+# # python and anaconda
 # export PATH=$PATH:$HOME/anaconda2/bin
 
-# dart and pub
-export PATH=$PATH:$HOME/.pub-cache/bin
+# # dart and pub
+# export PATH=$PATH:$HOME/.pub-cache/bin
 
 # capybara-webkit
 export PATH="$(brew --prefix qt@5.5)/bin:$PATH"
+
+#git duet
+GIT_DUET_CO_AUTHORED_BY=1
+
+#PHP
+export PATH="/usr/local/opt/php@7.1/bin:$PATH"
+export PATH="/usr/local/opt/php@7.1/sbin:$PATH"
+
+#asdf
+autoload -Uz compinit && compinit
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
