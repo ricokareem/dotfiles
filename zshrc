@@ -9,13 +9,6 @@ export ZSH=$HOME/.oh-my-zsh
 # ZSH_THEME="robbyrussell"
 ZSH_THEME="cobalt2"
 
-# Set list of themes to load
-# Setting this variable when ZSH_THEME=random
-# cause zsh load theme from this variable instead of
-# looking in ~/.oh-my-zsh/themes/
-# An empty array have no effect
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -58,14 +51,14 @@ ZSH_THEME="cobalt2"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git bundler osx rake ruby)
-
-source $ZSH/oh-my-zsh.sh
+plugins=(git asdf bundler osx rake ruby)
 
 # User configuration
 
-export PATH="$PATH:$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.rvm/bin:./node_modules/.bin:$PATH"
+export PATH="$PATH:$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:./node_modules/.bin"
 # export MANPATH="/usr/local/man:$MANPATH"
+
+source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -92,52 +85,32 @@ export PATH="$PATH:$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias list-emulator-images="./platforms/ios/cordova/lib/list-emulator-images"
-alias gti="git pull && git remote prune origin && prunedevelop"
-function mochatest() {
-  NODE_PATH=. mocha "$1"
-}
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-# export PATH="$HOME/.rbenv/bin:$PATH"
-# eval "$(rbenv init -)"
-
 # Android/ Cordova path update
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$HOME/Library/Android/sdk/platform-tools:$HOME/Library/Android/sdk/tools
 export ORG_GRADLE_PROJECT_cdvMinSdkVersion=20
 
-
-# place this after nvm initialization!
-autoload -U add-zsh-hook
-load-nvmrc() {
-  local node_version="$(nvm version)"
-  local nvmrc_path="$(nvm_find_nvmrc)"
-
-  if [ -n "$nvmrc_path" ]; then
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-
-    if [ "$nvmrc_node_version" != "N/A" ] && [ "$nvmrc_node_version" != "$node_version" ]; then
-      nvm use
-    fi
-  elif [ "$node_version" != "$(nvm version default)" ]; then
-    echo "Reverting to nvm default version"
-    nvm use default
-  fi
-}
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
-
 # VSCODE
 code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
 
-# python and anaconda
+# # python and anaconda
 # export PATH=$PATH:$HOME/anaconda2/bin
 export PATH=$PATH:$HOME/Library/Python/3.7/bin
 
-# dart and pub
-export PATH=$PATH:$HOME/.pub-cache/bin
+# # dart and pub
+# export PATH=$PATH:$HOME/.pub-cache/bin
 
 # capybara-webkit
 export PATH="$(brew --prefix qt@5.5)/bin:$PATH"
+
+#git duet
+GIT_DUET_CO_AUTHORED_BY=1
+
+#PHP
+export PATH="/usr/local/opt/php@7.1/bin:$PATH"
+export PATH="/usr/local/opt/php@7.1/sbin:$PATH"
+
+#asdf
+autoload -Uz compinit && compinit
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash

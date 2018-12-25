@@ -1,0 +1,32 @@
+==> libxml2
+libxml2 is keg-only, which means it was not symlinked into /usr/local,
+because macOS already provides this software and installing another version in
+parallel can cause all kinds of trouble.
+
+If you need to have libxml2 first in your PATH run:
+  echo 'export PATH="/usr/local/opt/libxml2/bin:$PATH"' >> ~/.zshrc
+
+For compilers to find libxml2 you may need to set:
+  export LDFLAGS="-L/usr/local/opt/libxml2/lib"
+  export CPPFLAGS="-I/usr/local/opt/libxml2/include"
+
+For pkg-config to find libxml2 you may need to set:
+  export PKG_CONFIG_PATH="/usr/local/opt/libxml2/lib/pkgconfig"
+
+==> libxslt
+To allow the nokogiri gem to link against this libxslt run:
+  gem install nokogiri -- --with-xslt-dir=/usr/local/opt/libxslt
+
+libxslt is keg-only, which means it was not symlinked into /usr/local,
+because macOS already provides this software and installing another version in
+parallel can cause all kinds of trouble.
+
+If you need to have libxslt first in your PATH run:
+  echo 'export PATH="/usr/local/opt/libxslt/bin:$PATH"' >> ~/.zshrc
+
+For compilers to find libxslt you may need to set:
+  export LDFLAGS="-L/usr/local/opt/libxslt/lib"
+  export CPPFLAGS="-I/usr/local/opt/libxslt/include"
+
+For pkg-config to find libxslt you may need to set:
+  export PKG_CONFIG_PATH="/usr/local/opt/libxslt/lib/pkgconfig"
