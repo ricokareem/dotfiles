@@ -110,7 +110,6 @@ GIT_DUET_CO_AUTHORED_BY=1
 export PATH="/usr/local/opt/php@7.1/bin:$PATH"
 export PATH="/usr/local/opt/php@7.1/sbin:$PATH"
 
-#asdf
-autoload -Uz compinit && compinit
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
+# # asdf-vm (commented out.  use oh-my-zsh asdf plugin at startup)
+# . $HOME/.asdf/asdf.sh
+# . $HOME/.asdf/completions/asdf.bash
