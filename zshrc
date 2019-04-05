@@ -7,7 +7,16 @@ export ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 # ZSH_THEME="agnoster"
 # ZSH_THEME="robbyrussell"
-ZSH_THEME="cobalt2"
+# ZSH_THEME="cobalt2"
+ZSH_THEME="spaceship"
+SPACESHIP_PROMPT_ADD_NEWLINE="true"
+SPACESHIP_CHAR_SYMBOL="\uf0e7"
+SPACESHIP_CHAR_PREFIX="\uf296"
+SPACESHIP_CHAR_SUFFIX=(" ")
+SPACESHIP_CHAR_COLOR_SUCCESS="yellow"
+SPACESHIP_PROMPT_DEFAULT_PREFIX="$USER"
+SPACESHIP_PROMPT_FIRST_PREFIX_SHOW="true"
+SPACESHIP_USER_SHOW="true"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -59,6 +68,7 @@ export PATH="$PATH:$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:./node
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
+source $(dirname $(gem which colorls))/tab_complete.sh
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -84,6 +94,8 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias ls='colorls --light --sort-dirs --report'
+alias lc='colorls --tree --light'
 
 # Android/ Cordova path update
 export ANDROID_HOME=$HOME/Library/Android/sdk
