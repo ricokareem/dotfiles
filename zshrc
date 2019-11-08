@@ -93,20 +93,16 @@ export ORG_GRADLE_PROJECT_cdvMinSdkVersion=20
 # VSCODE
 code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
 
-# # python and anaconda
-# export PATH=$PATH:$HOME/anaconda2/bin
-export PATH=$PATH:$HOME/Library/Python/3.7/bin
-
 # # dart and pub
 # export PATH=$PATH:$HOME/.pub-cache/bin
 
-# capybara-webkit
-export PATH="$(brew --prefix qt@5.5)/bin:$PATH"
+# # capybara-webkit
+# export PATH="$(brew --prefix qt@5.5)/bin:$PATH"
 
-#git duet
+# git duet
 GIT_DUET_CO_AUTHORED_BY=1
 
-#PHP
+# PHP
 export PATH="/usr/local/opt/php@7.1/bin:$PATH"
 export PATH="/usr/local/opt/php@7.1/sbin:$PATH"
 
