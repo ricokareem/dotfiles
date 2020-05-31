@@ -1,11 +1,13 @@
 {
-  "client/assets/javascripts/*.js": {
-    "alternate": "spec/javascripts/{}-test.js"
+  "*.js": {
+    "alternate": ["{dirname}/__tests__/{basename}.test.js", "{}.test.js"]
   },
-  "client/assets/javascripts/*.jsx": {
-    "alternate": "spec/javascripts/{}-test.js"
-  },
-  "app/*.rb": {
-    "alternate": "spec/{}_spec.rb"
+  "*.jsx": {
+    "alternate": [
+      "{dirname}/__tests__/{basename}.test.jsx",
+      "{dirname}/__tests__/{basename}.test.js",
+      "{}.test.jsx",
+      "{}.test.js"
+    ]
   }
 }
