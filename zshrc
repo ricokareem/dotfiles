@@ -62,12 +62,12 @@ ZSH_THEME="cobalt2"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git asdf bundler osx rake ruby docker docker-compose)
 
+source $ZSH/oh-my-zsh.sh
+
 # User configuration
 
 export PATH="$PATH:$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:./node_modules/.bin"
 # export MANPATH="/usr/local/man:$MANPATH"
-
-source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -94,6 +94,12 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+alias list-emulator-images="./platforms/ios/cordova/lib/list-emulator-images"
+
+function ghistory() {
+    history | grep "$1"
+}
+
 # Android/ Cordova path update
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$HOME/Library/Android/sdk/platform-tools:$HOME/Library/Android/sdk/tools
@@ -114,3 +120,8 @@ GIT_DUET_CO_AUTHORED_BY=1
 # PHP
 export PATH="/usr/local/opt/php@7.1/bin:$PATH"
 export PATH="/usr/local/opt/php@7.1/sbin:$PATH"
+
+# asdf
+autoload -Uz compinit && compinit
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
