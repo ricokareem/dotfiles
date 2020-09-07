@@ -117,11 +117,13 @@ code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
 # git duet
 GIT_DUET_CO_AUTHORED_BY=1
 
-# PHP
-export PATH="/usr/local/opt/php@7.1/bin:$PATH"
-export PATH="/usr/local/opt/php@7.1/sbin:$PATH"
-
 # asdf
 autoload -Uz compinit && compinit
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
+
+# STARSHIP
+# eval "$(starship init zsh)"
+
+# FLUTTER
+# export PATH=$HOME/workspace/flutter/flutter/bin:$PATH
