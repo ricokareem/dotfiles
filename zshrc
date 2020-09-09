@@ -127,3 +127,6 @@ autoload -Uz compinit && compinit
 
 # FLUTTER
 # export PATH=$HOME/workspace/flutter/flutter/bin:$PATH
+
+# get the weather forcast
+alias weather='curl "wttr.in?u"'
