@@ -60,7 +60,7 @@ ZSH_THEME="cobalt2"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git asdf bundler osx rake ruby docker docker-compose)
+plugins=(git asdf bundler macos rake ruby docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -100,33 +100,70 @@ function ghistory() {
     history | grep "$1"
 }
 
-# Android/ Cordova path update
+# #ANDROID
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$HOME/Library/Android/sdk/platform-tools:$HOME/Library/Android/sdk/tools
 export ORG_GRADLE_PROJECT_cdvMinSdkVersion=20
 
-# VSCODE
+# #VSCODE
 code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
 
-# # dart and pub
+# #DART
 # export PATH=$PATH:$HOME/.pub-cache/bin
 
-# # capybara-webkit
+# #CAPYBARA-WEBKIT
 # export PATH="$(brew --prefix qt@5.5)/bin:$PATH"
 
-# git duet
+# #GIT DUET
 GIT_DUET_CO_AUTHORED_BY=1
 
-# asdf
-autoload -Uz compinit && compinit
+# #ASDF
 . $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
+# autoload -Uz compinit && compinit
+# . $HOME/.asdf/asdf.sh
+# . $HOME/.asdf/completions/asdf.bash
 
-# STARSHIP
+# #STARSHIP
 # eval "$(starship init zsh)"
 
-# FLUTTER
+# #FLUTTER
 # export PATH=$HOME/workspace/flutter/flutter/bin:$PATH
 
-# get the weather forcast
+# #WEATHER FORECAST
 alias weather='curl "wttr.in?u"'
+
+# #FZF - FUZZY FINDER
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+fzf_cd() {
+    local selected_dir
+    selected_dir=$(find . -type d | fzf +m --preview 'tree -C {} | head -200')
+    if [ -n "$selected_dir" ]; then
+        cd "$selected_dir"
+    fi
+}
+alias cdf='fzf_cd'
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
+
+# #PYTHON
+PATH=~/.console-ninja/.bin:$PATH
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/opt/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# #REACT NATIVE / EXPO
+# export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
+# export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
+export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
