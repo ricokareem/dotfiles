@@ -60,7 +60,8 @@ ZSH_THEME="cobalt2"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git asdf bundler macos rake ruby docker docker-compose)
+# plugins=(git asdf bundler macos ruby docker docker-compose)
+plugins=(git bundler macos ruby docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -94,6 +95,8 @@ export PATH="$PATH:$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:./node
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+export REACT_EDITOR="code"
+
 alias list-emulator-images="./platforms/ios/cordova/lib/list-emulator-images"
 
 function ghistory() {
@@ -117,10 +120,13 @@ code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
 # #GIT DUET
 GIT_DUET_CO_AUTHORED_BY=1
 
-# #ASDF
-. $HOME/.asdf/asdf.sh
-# autoload -Uz compinit && compinit
+# mise-en-place
+export PATH="$HOME/.local/share/mise/shims:$PATH"
+# $HOME/.local/share/mise/installs/node/25.2.0/bin/node
+
+# asdf
 # . $HOME/.asdf/asdf.sh
+# autoload -Uz compinit && compinit
 # . $HOME/.asdf/completions/asdf.bash
 
 # #STARSHIP
@@ -167,3 +173,34 @@ unset __conda_setup
 # export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
 # export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
 export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
+
+
+# HUGGINGFACE
+export TOKENIZERS_PARALLELISM=false
+
+
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
+
+# Added by Antigravity
+# export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
+# export PATH="$HOME/.local/bin:$PATH"
+
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="$HOME/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# #mise-en-place
+eval "$(mise activate zsh)"
+
