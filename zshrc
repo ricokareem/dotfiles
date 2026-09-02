@@ -204,3 +204,6 @@ esac
 # #mise-en-place
 eval "$(mise activate zsh)"
 
+# GAM Google Admin Management Tool
+alias gam7="/Users/rico/bin/gam7/gam"
+export PATH="$HOME/bin/gam7:$PATH"export PATH="$HOME/.local/bin:$PATH"
