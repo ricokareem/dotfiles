@@ -1,0 +1,16 @@
+# Targets chezmoi DELETES from $HOME on apply. Use sparingly — these are real
+# removals, not just "stop managing".
+#
+# asdf leftovers. asdf was replaced by mise: the binary is gone and ~/.asdf is a
+# dead checkout, but these two files were still being read.
+#
+# .tool-versions is the one that actually broke things. mise reads it in
+# addition to ~/.config/mise/config.toml, so a stale
+# `java jetbrains-jre-21.0.8b1097.42` line in it made `mise install` fail with
+# "no metadata found for version", which aborted the entire `chezmoi apply`.
+# Its node and ruby pins now live in ~/.config/mise/config.toml instead.
+.tool-versions
+
+# .asdfrc only sets `legacy_version_file = yes`, an asdf-only setting that
+# nothing reads any more.
+.asdfrc

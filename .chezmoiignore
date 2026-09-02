@@ -1,0 +1,3 @@
+# Files that live in the source repo but must NOT be copied into $HOME.
+# Without this, `chezmoi apply` would create ~/README.md.
+README.md

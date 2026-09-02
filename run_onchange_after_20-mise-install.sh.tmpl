@@ -1,0 +1,34 @@
+#!/bin/bash
+# Installs the runtimes declared in ~/.config/mise/config.toml.
+#
+# This exists because brew installs the mise BINARY and chezmoi writes its
+# CONFIG, but nothing actually runs `mise install` — so on a fresh machine the
+# config named a node version that was never downloaded, and every `node` call
+# hit a shim pointing at nothing.
+#
+# mise config hash: {{ include "dot_config/mise/config.toml" | sha256sum }}
+set -euo pipefail
+
+# A first `chezmoi apply` can run before ~/.zshenv has ever been sourced, so
+# PATH here is whatever the invoking shell had. Find brew's bin explicitly.
+export PATH="/opt/homebrew/bin:$PATH"
+
+if ! command -v mise >/dev/null 2>&1; then
+  echo "mise not found — skipping. Re-run 'chezmoi apply' after brew bundle." >&2
+  exit 0
+fi
+
+echo "==> mise install"
+# Deliberately NOT fatal. A single unresolvable tool version makes `mise install`
+# exit non-zero, and under `set -e` that aborted the whole apply — which meant a
+# bad pin also stopped 30-oh-my-zsh from ever running, leaving a machine with no
+# prompt for a reason that had nothing to do with zsh. Runtimes are recoverable
+# (`mise install` again, by hand, with the real error in front of you); a
+# half-configured shell is more annoying.
+if ! mise install --yes; then
+  echo >&2
+  echo "!!  mise install failed — continuing with the rest of the apply." >&2
+  echo "!!  Fix the tool versions, then re-run: mise install" >&2
+  echo "!!  'mise ls' shows which config file declares each version." >&2
+  echo >&2
+fi

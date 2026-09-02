@@ -1,0 +1,16 @@
+# ~/.zprofile — deliberately (almost) empty. Do NOT add PATH lines here.
+#
+# This file is managed by chezmoi purely so it cannot silently regrow. It runs
+# on every LOGIN shell, after .zshenv and before .zshrc, and installers love to
+# append unguarded `export PATH="$PATH:..."` lines to it. The JetBrains Toolbox
+# installer did exactly that, which meant every login shell got a second copy of
+# that entry appended to an already-correct PATH. (That entry now lives in
+# .zshenv, behind a strip-then-append guard that cannot duplicate.)
+#
+# PATH belongs in exactly two places:
+#   ~/.zshenv  — sets it for ALL shells (scripts, cron, GUI apps, agent shells)
+#   ~/.zshrc   — RE-ASSERTS priority, because macOS /etc/zprofile runs
+#                `path_helper` in between these two files, which rebuilds PATH
+#                with /usr/bin & friends hoisted to the front.
+#
+# If an installer appends a PATH line here, move it to ~/.zshenv instead.

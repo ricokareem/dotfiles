@@ -1,0 +1,60 @@
+# Homebrew manifest. `brew bundle install --file=~/.Brewfile` installs everything
+# here; run_onchange_after_10-brew-bundle.sh does that automatically on `chezmoi
+# apply` whenever this file changes.
+#
+# This list was generated from `brew leaves` (top-level installs only — not the
+# hundred-odd dependencies brew pulls in), so it stays readable and reinstalls
+# cleanly on a new Mac.
+#
+# To prune something you no longer use: delete the line, then run
+#   brew bundle cleanup --file=~/.Brewfile          # shows what would go
+#   brew bundle cleanup --file=~/.Brewfile --force
+# `brew bundle` alone never uninstalls, so removing a line here is inert until
+# you run cleanup.
+
+# --- Shell & terminal --------------------------------------------------------
+brew "mise"                 # runtime version manager (replaced asdf and jenv)
+brew "fzf"                  # Ctrl-R / Ctrl-T fuzzy finder, wired up in .zshrc
+brew "bat"                  # cat with syntax highlighting
+brew "tree"                 # used by the fzf-cd preview in .zshrc
+brew "chezmoi"              # manages this very repo
+
+# --- Git ---------------------------------------------------------------------
+brew "lazygit"
+brew "pre-commit"
+brew "git-filter-repo"      # history surgery (removing a leaked secret, etc.)
+brew "git-xet"              # Hugging Face large-file transfer; see .gitconfig
+brew "hf"                   # Hugging Face CLI
+
+# --- Languages & build -------------------------------------------------------
+brew "openjdk@17"           # older Android/Gradle builds still want 17
+brew "openjdk@21"           # JAVA_HOME default; see `use-jdk` in .zshrc
+brew "maven"
+brew "llvm"
+brew "swift-protobuf"
+
+# --- Cloud & data ------------------------------------------------------------
+brew "azure-cli"
+brew "mongodb-atlas-cli"
+
+# --- Media & documents -------------------------------------------------------
+brew "ffmpeg"
+brew "exiftool"
+brew "pandoc"
+brew "libavif"
+brew "libheif"
+brew "libraw"
+
+# --- Misc --------------------------------------------------------------------
+brew "ubi"                  # installs single-binary releases straight from GitHub
+brew "witr"
+
+# --- Casks -------------------------------------------------------------------
+cask "ghostty"              # terminal; config at .config/ghostty/config
+cask "claude-code"
+# Required by ZSH_THEME="cobalt2" and by Ghostty's font-family. Without it the
+# prompt's powerline separators and git glyphs render as tofu boxes.
+cask "font-meslo-lg-nerd-font"
+
+# NOTE: oh-my-zsh is NOT installable via brew and is NOT managed by chezmoi —
+# it is a self-updating git checkout. Install it once per machine; see README.

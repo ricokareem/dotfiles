@@ -1,0 +1,82 @@
+# ~/.zshenv — sourced by EVERY zsh invocation: interactive shells, scripts,
+# cron, GUI-launched apps, and editor/agent tool shells alike.
+#
+# Everything here must be cheap and side-effect-free. Nothing that prints,
+# prompts, or takes measurable time — this file runs even for `zsh -c 'true'`.
+#
+# PATH lives here (not in .zshrc) so non-interactive shells can find the same
+# tools you can. The old setup put PATH only in .zshrc, which meant a script or
+# a `zsh -c` invocation got the bare macOS PATH and could not see mise-managed
+# node, pnpm globals, or anything from Homebrew.
+
+# --- Homebrew ----------------------------------------------------------------
+# This is what `eval "$(brew shellenv)"` does, written out. Same result, no
+# subprocess — brew shellenv costs ~30ms and this file runs constantly.
+export HOMEBREW_PREFIX="/opt/homebrew"
+export HOMEBREW_CELLAR="/opt/homebrew/Cellar"
+export HOMEBREW_REPOSITORY="/opt/homebrew"
+export INFOPATH="/opt/homebrew/share/info${INFOPATH:+:$INFOPATH}"
+
+# --- PATH --------------------------------------------------------------------
+# Every entry goes through _prepend/_append, which strip an existing copy first.
+# That is what makes re-sourcing this file idempotent: without the strip, each
+# `exec zsh` or nested login shell appends another duplicate, and PATH grows
+# without bound. (~/.zprofile had exactly that bug from a pipx installer.)
+_path_prepend() {
+  [ -d "$1" ] || return 0
+  PATH="${PATH//":$1:"/":"}"; PATH="${PATH#"$1:"}"; PATH="${PATH%":$1"}"
+  PATH="$1:$PATH"
+}
+_path_append() {
+  [ -d "$1" ] || return 0
+  PATH="${PATH//":$1:"/":"}"; PATH="${PATH#"$1:"}"; PATH="${PATH%":$1"}"
+  PATH="$PATH:$1"
+}
+
+# Lowest priority first — each prepend pushes the previous one down.
+_path_prepend "/opt/homebrew/bin"
+_path_prepend "/opt/homebrew/sbin"
+_path_prepend "/opt/homebrew/opt/openjdk@21/bin"
+_path_prepend "$HOME/.bun/bin"
+_path_prepend "$HOME/Library/pnpm"
+# mise shims last => highest priority, so mise-managed node/ruby/etc. win over
+# any Homebrew copy. Shims are plain executables and need no activation hook,
+# which is precisely why they belong here and `mise activate` belongs in .zshrc.
+_path_prepend "$HOME/.local/share/mise/shims"
+
+# Appended — these should lose to everything above.
+_path_append "$HOME/.local/bin"
+_path_append "$HOME/bin"
+_path_append "$HOME/bin/gam7"
+_path_append "$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
+
+export PATH
+unset -f _path_prepend _path_append
+
+# NOTE: `./node_modules/.bin` is deliberately NOT on PATH. It used to be, and it
+# means any directory you cd into can put an executable named `test`, `ls`, or
+# `tsc` in front of the real one. Use `npx`/`pnpm exec`, or a per-project direnv.
+
+# --- Java --------------------------------------------------------------------
+# jenv was removed: it shimmed every `java` call and cost ~150ms of shell
+# startup to manage JDKs that only IntelliJ and the occasional maven build use.
+# JAVA_HOME below covers the common case; `use-jdk 17` (see .zshrc) switches.
+[ -x /usr/libexec/java_home ] && export JAVA_HOME="$(/usr/libexec/java_home -v 21 2>/dev/null)"
+
+# --- Misc environment --------------------------------------------------------
+export EDITOR="vi"
+export VISUAL="code -w"
+export REACT_EDITOR="code"
+export TOKENIZERS_PARALLELISM=false   # silences the HF tokenizers fork warning
+export BUN_INSTALL="$HOME/.bun"
+export PNPM_HOME="$HOME/Library/pnpm"
+export GIT_DUET_CO_AUTHORED_BY=1
+
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+
+# --- Machine-local, never committed ------------------------------------------
+# Secrets and per-machine env (API keys, DB passwords) go HERE, not in this
+# managed file — anything in a managed file lands in a public git repo.
+# An ELASTIC_PASSWORD was previously sitting in a tracked ~/.zshrc; move that
+# kind of thing here.
+[ -f "$HOME/.zshenv.local" ] && . "$HOME/.zshenv.local"

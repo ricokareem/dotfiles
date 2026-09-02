@@ -1,0 +1,48 @@
+# Ghostty — https://ghostty.org/docs/config
+# Reload without restarting: Cmd+Shift+, (or `ghostty +validate-config` to check).
+#
+# This replaces the iTerm2 Profiles.json that used to live in this repo. iTerm2
+# stores its settings in a binary plist that it rewrites on quit, so it can only
+# be version-controlled via manual JSON export/import. Ghostty's config is this
+# file — chezmoi can manage it directly, which is the whole point of the switch.
+
+# --- Appearance --------------------------------------------------------------
+# Cobalt2 to match ZSH_THEME in .zshrc. `ghostty +list-themes` browses the rest.
+theme = Cobalt2
+
+# Nerd Font is required: the cobalt2 zsh theme draws powerline separators and
+# git glyphs that render as tofu in any other font. Installed by the Brewfile
+# (cask "font-meslo-lg-nerd-font").
+font-family = MesloLGS Nerd Font
+font-size = 14
+font-thicken = true
+
+window-padding-x = 8
+window-padding-y = 6
+window-theme = dark
+macos-titlebar-style = tabs
+background-opacity = 0.97
+background-blur = 20
+
+# --- Behaviour ---------------------------------------------------------------
+scrollback-limit = 10000000
+mouse-hide-while-typing = true
+copy-on-select = clipboard
+confirm-close-surface = false
+window-save-state = always
+
+# Open new tabs/splits in the current directory rather than $HOME.
+window-inherit-working-directory = true
+
+# --- Shell integration -------------------------------------------------------
+# Ghostty injects this itself; it powers jump-to-previous-prompt (Cmd+Up/Down),
+# working-directory inheritance above, and marking command output for selection.
+shell-integration = zsh
+shell-integration-features = cursor,sudo,title
+
+# --- Keybindings -------------------------------------------------------------
+keybind = cmd+d=new_split:right
+keybind = cmd+shift+d=new_split:down
+keybind = cmd+w=close_surface
+keybind = cmd+enter=toggle_split_zoom
+keybind = cmd+k=clear_screen

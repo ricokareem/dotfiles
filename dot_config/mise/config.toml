@@ -1,0 +1,23 @@
+# Global tool versions. A project's own mise.toml / .tool-versions overrides
+# this when you cd into it.
+#
+# This is the ONLY global tool declaration now. ~/.tool-versions used to sit
+# alongside it (an asdf leftover), and `mise install` reads BOTH — so this file
+# did not actually control what got installed. See .chezmoiremove: chezmoi now
+# deletes that file rather than letting the two quietly disagree.
+[tools]
+node = "25.2.0"
+# Installs from jdx/ruby precompiled binaries in seconds. It only compiles from
+# source (several minutes) if you set `mise settings ruby.compile=true`.
+ruby = "3.3.0"
+
+# No java here on purpose. ~/.tool-versions pinned
+# `java jetbrains-jre-21.0.8b1097.42` — a JetBrains Toolbox runtime that mise's
+# java backend has no metadata for, so `mise install` failed outright on it and
+# took the whole `chezmoi apply` down with it. JDKs come from Homebrew instead
+# (openjdk@17 / openjdk@21 in the Brewfile), with `use-jdk 17` in .zshrc to
+# switch JAVA_HOME per shell.
+
+[settings]
+# Don't nag about missing tools on every prompt.
+experimental = false

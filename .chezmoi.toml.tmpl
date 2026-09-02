@@ -1,0 +1,31 @@
+{{/*
+Renders ~/.config/chezmoi/chezmoi.toml on `chezmoi init`.
+
+Its only job is to ask for the values that differ per machine, so no identity
+is hard-coded in the repo. `promptStringOnce` asks ONLY when the key is absent
+from the existing config, so re-running `chezmoi init` on a set-up machine is a
+no-op and will not re-prompt or clobber your answers.
+
+If you add a template that references a new .key, add a prompt for it HERE too.
+A template referencing an unset key fails the whole apply with
+"map has no entry for key ..." — which does not hint at what to do about it.
+*/ -}}
+{{- $name  := promptStringOnce . "git_name"  "Git author name" -}}
+{{- $email := promptStringOnce . "git_email" "Git author email" -}}
+
+# Pin the source directory to wherever this init is being run FROM, rather than
+# letting it default to ~/.local/share/chezmoi.
+#
+# It has to be set here, not by hand in the generated file: `chezmoi init`
+# re-renders ~/.config/chezmoi/chezmoi.toml from this template and silently
+# drops anything not produced by it. A hand-added sourceDir survives exactly
+# until the next init.
+#
+# Using .chezmoi.sourceDir rather than a hard-coded path keeps both flows right:
+#   chezmoi init --source ~/projects/ricokareem/dotfiles  → that checkout
+#   chezmoi init ricokareem                               → the fresh clone
+sourceDir = {{ .chezmoi.sourceDir | quote }}
+
+[data]
+  git_name  = {{ $name  | quote }}
+  git_email = {{ $email | quote }}

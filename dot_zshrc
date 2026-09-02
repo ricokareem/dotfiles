@@ -1,0 +1,122 @@
+# ~/.zshrc — INTERACTIVE shells only.
+#
+# Env vars and PATH construction live in ~/.zshenv so that non-interactive
+# shells get them too. What is left here is prompt, completion, keybindings,
+# aliases, and functions — things only a human at a terminal needs.
+
+# --- PATH priority, re-asserted (NOT a duplicate of .zshenv) -----------------
+# .zshenv already set this ordering, but macOS /etc/zprofile runs `path_helper`
+# afterwards, which rebuilds PATH with /usr/bin, /bin, /usr/sbin at the FRONT.
+# By the time this file runs, .zshenv's ordering has been clobbered. Re-prepend
+# the entries whose priority actually matters, in reverse priority order
+# (last prepend wins). Strip-then-prepend, so this can never duplicate.
+for _d in \
+  "$HOME/Library/pnpm" \
+  "$HOME/.bun/bin" \
+  /opt/homebrew/bin \
+  "$HOME/.local/share/mise/shims"
+do
+  [ -d "$_d" ] || continue
+  PATH="${PATH//":$_d:"/":"}"; PATH="${PATH#"$_d:"}"; PATH="${PATH%":$_d"}"
+  PATH="$_d:$PATH"
+done
+unset _d
+export PATH
+
+# --- Completion fpath --------------------------------------------------------
+# Must be complete BEFORE compinit runs (oh-my-zsh runs it, below). Homebrew's
+# site-functions is not on fpath by default, and it carries _brew _gh _mise
+# _docker _chezmoi — omit this and every one of those completions stays dead.
+[ -d /opt/homebrew/share/zsh/site-functions ] &&
+  fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+
+# --- oh-my-zsh ---------------------------------------------------------------
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="cobalt2"          # needs a Nerd Font; Brewfile installs meslo-lg
+# Plugins are a startup-time cost, so this list is short on purpose. Notably
+# absent: `mise`, `asdf` and `fzf`. mise and fzf are set up explicitly below;
+# their omz plugins would just do it a second time. asdf is gone entirely.
+plugins=(git bundler macos docker docker-compose)
+
+# ~/.oh-my-zsh is NOT managed by chezmoi (it is a git checkout that updates
+# itself), so a freshly-applied machine may not have it yet. Degrade to a bare
+# compinit rather than dying: every completion source at the bottom of this file
+# calls `compdef`, which does not exist until something has run compinit.
+if [ -r "$ZSH/oh-my-zsh.sh" ]; then
+  source "$ZSH/oh-my-zsh.sh"
+else
+  print -u2 "zshrc: ~/.oh-my-zsh missing — no prompt or plugins. See README."
+  autoload -Uz compinit
+  # Rebuild the dump at most once a day; -C trusts the existing one and skips
+  # the scan, which is most of compinit's cost.
+  if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh-24) ]]; then compinit -C; else compinit; fi
+fi
+
+# --- Tool activation ---------------------------------------------------------
+# The shims on PATH (see .zshenv) already resolve mise-managed tools everywhere.
+# `activate` additionally keeps the environment in sync as you cd between
+# projects with different .tool-versions / mise.toml, which only matters here.
+command -v mise >/dev/null && eval "$(mise activate zsh)"
+
+# --- fzf ---------------------------------------------------------------------
+# Ctrl-R history search, Ctrl-T file insert, Alt-C cd.
+command -v fzf >/dev/null && source <(fzf --zsh)
+
+# --- Aliases -----------------------------------------------------------------
+alias weather='curl "wttr.in?u"'
+alias gam7="$HOME/bin/gam7/gam"
+alias cdf='fzf-cd'
+alias lg='lazygit'
+
+# --- Functions ---------------------------------------------------------------
+
+# Search shell history. `history | grep` but shorter.
+ghistory() { history 0 | grep -i -- "$1" }
+
+# fzf-pick a directory (with a tree preview) and cd into it.
+fzf-cd() {
+  local dir
+  dir=$(find . -type d -not -path '*/.git/*' -not -path '*/node_modules/*' 2>/dev/null \
+        | fzf +m --preview 'tree -C {} | head -200') || return
+  [ -n "$dir" ] && cd "$dir"
+}
+
+# Open a directory in VS Code in a new window, defaulting to $PWD.
+code() { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args "${@:-$PWD}" }
+
+# Switch JAVA_HOME for this shell. Replaces jenv, which shimmed every `java`
+# call and cost ~150ms per shell to do the same thing.
+#   use-jdk        -> list installed JDKs
+#   use-jdk 17     -> point JAVA_HOME at JDK 17 for this shell only
+use-jdk() {
+  if [ -z "$1" ]; then /usr/libexec/java_home -V; return; fi
+  local home
+  home=$(/usr/libexec/java_home -v "$1" 2>/dev/null) || { print -u2 "no JDK $1"; return 1 }
+  export JAVA_HOME="$home"
+  export PATH="$JAVA_HOME/bin:$PATH"
+  java -version
+}
+
+# Load conda on demand. The `conda initialize` block used to run in every shell
+# and cost ~200ms of startup for something used a few times a month. This is the
+# same block, deferred: run `conda-on` once per shell that needs it.
+conda-on() {
+  __conda_setup="$('/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
+  if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+  elif [ -f "/opt/miniconda3/etc/profile.d/conda.sh" ]; then
+    . "/opt/miniconda3/etc/profile.d/conda.sh"
+  else
+    export PATH="/opt/miniconda3/bin:$PATH"
+  fi
+  unset __conda_setup
+}
+
+# --- Completions -------------------------------------------------------------
+# These need `compdef`, provided by whichever branch ran compinit above.
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# --- Machine-local, never committed ------------------------------------------
+# Per-machine aliases, project shortcuts, work-only config. Secrets belong in
+# ~/.zshenv.local instead, so non-interactive shells see them too.
+[ -f "$HOME/.zshrc.local" ] && . "$HOME/.zshrc.local"

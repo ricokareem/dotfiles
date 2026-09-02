@@ -1,0 +1,38 @@
+#!/bin/bash
+# Installs everything in ~/.Brewfile.
+#
+# The `run_onchange_` prefix means chezmoi re-runs this only when the script's
+# rendered content changes — which is why the Brewfile's checksum is embedded
+# below. Without that line, editing the Brewfile would leave this script
+# byte-identical and nothing would ever get installed.
+#
+# Brewfile hash: {{ include "dot_Brewfile" | sha256sum }}
+#
+# `_after_` is load-bearing: this script READS ~/.Brewfile, and chezmoi writes
+# target files only AFTER the `_before_` scripts have run. As a `_before_`
+# script it failed on a first apply, because the file it needs did not exist yet.
+#
+# The numeric prefix orders it against the other `_after_` scripts — brew must
+# install the mise binary (10) before `mise install` runs (20).
+set -euo pipefail
+
+if ! command -v brew >/dev/null 2>&1; then
+  echo "brew not found — install Homebrew first: https://brew.sh" >&2
+  exit 1
+fi
+
+# Casks go to ~/Applications: no sudo, and it keeps them out of any synced dir.
+# Set here as well as in .zshenv because chezmoi may be invoked from a GUI or
+# cron context that never sources .zshenv. Keep the two values in sync.
+export HOMEBREW_CASK_OPTS="--appdir=~/Applications"
+
+# --file, not --global. `--global` resolves to $HOMEBREW_BUNDLE_FILE_GLOBAL,
+# then $XDG_CONFIG_HOME/homebrew/Brewfile, then ~/.homebrew/Brewfile, and only
+# falls back to ~/.Brewfile — so on any machine with XDG_CONFIG_HOME set it
+# would silently read a different file than the one chezmoi manages.
+#
+# No --no-lock either: Homebrew removed bundle lockfiles, and passing the flag
+# now aborts the command with "Error: invalid option: --no-lock"
+# (Homebrew 6.0.21).
+echo "==> brew bundle (~/.Brewfile)"
+brew bundle install --file="$HOME/.Brewfile"

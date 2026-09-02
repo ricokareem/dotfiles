@@ -1,0 +1,45 @@
+# Identity comes from ~/.config/chezmoi/chezmoi.toml, which `chezmoi init`
+# prompts for and which is NOT committed — so this repo carries no email.
+[user]
+	name = {{ .git_name }}
+	email = {{ .git_email }}
+[core]
+	editor = vi
+	autocrlf = input
+	safecrlf = false
+	excludesfile = ~/.gitignore_global
+	# `~` instead of the old hard-coded /Users/rico — the previous absolute path
+	# silently did nothing on any machine with a different username.
+[init]
+	defaultBranch = main
+[push]
+	# `simple` is git's default since 2.0 and the safe one: it refuses to push
+	# when the local and upstream branch names differ. The old `tracking`
+	# (= `upstream`) pushes to a differently-named upstream without complaint.
+	default = simple
+	autoSetupRemote = true
+[pull]
+	ff = only
+[fetch]
+	prune = true
+[color]
+	ui = true
+[merge]
+	conflictstyle = zdiff3
+[diff]
+	algorithm = histogram
+[rerere]
+	enabled = false
+[credential]
+	helper = osxkeychain
+[alias]
+	dci = duet-commit
+	find-orphan-branches = !git branch -vv | grep ': gone]' | awk '{print $1}'
+	prune-orphan-branches = !git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -r git branch -D
+# git-xet: large-file transfer for Hugging Face repos. Left as-is from the
+# previous ~/.gitconfig; the `hf` and `git-xet` formulae in the Brewfile are
+# what make it work.
+[lfs "customtransfer.xet"]
+	path = git-xet
+	args = transfer
+	concurrent = true

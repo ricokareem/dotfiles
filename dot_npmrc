@@ -1,0 +1,4 @@
+# legacy-peer-deps: npm 7+ fails installs on peer-dependency conflicts that
+# npm 6 merely warned about. Kept from the previous ~/.npmrc — a lot of older
+# React/Cordova-era projects will not install without it.
+legacy-peer-deps=true

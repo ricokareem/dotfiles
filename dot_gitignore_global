@@ -1,0 +1,9 @@
+# Wired up by ~/.gitconfig -> core.excludesfile. Things that should never be
+# committed to ANY repo, regardless of that repo's own .gitignore.
+.DS_Store
+.idea/
+.vscode/
+*.swp
+.projections.json
+.envrc
+.direnv/
