@@ -216,6 +216,10 @@ will find it.
   installs it once (step 30) and then leaves it alone. `.zshrc` degrades
   gracefully if it's missing — warns on stderr, runs a bare `compinit`, and
   leaves you promptless rather than broken.
+- **The cobalt2 theme is not part of oh-my-zsh.** It comes from
+  wesbos/Cobalt2-iterm; step 30 fetches it into `~/.oh-my-zsh/custom/themes/`.
+  Without it every shell prints `theme 'cobalt2' not found` and you get the
+  default prompt.
 - **The cobalt2 theme needs a Nerd Font.** `cask "font-meslo-lg-nerd-font"` in
   the Brewfile covers it. Without it the prompt separators render as tofu.
 - **`brew bundle` never uninstalls.** Deleting a line from the Brewfile is inert
