@@ -52,6 +52,7 @@ brew "witr"
 # --- Casks -------------------------------------------------------------------
 cask "ghostty"              # terminal; config at .config/ghostty/config
 cask "claude-code"
+cask "codex"                # OpenAI Codex CLI
 # Required by ZSH_THEME="cobalt2" and by Ghostty's font-family. Without it the
 # prompt's powerline separators and git glyphs render as tofu boxes.
 cask "font-meslo-lg-nerd-font"
