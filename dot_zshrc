@@ -52,6 +52,16 @@ else
   if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh-24) ]]; then compinit -C; else compinit; fi
 fi
 
+# Cobalt2's own prompt_dir paints the path segment ANSI blue (#1460d2 in the
+# Cobalt2 palette). Restore the teal it used to have. Overridden here rather
+# than by editing ~/.oh-my-zsh/custom/themes/cobalt2.zsh-theme, because that
+# file is not chezmoi source — run_once_after_30-oh-my-zsh.sh curls it from
+# wesbos/Cobalt2-iterm, so any edit there is lost the next time it is fetched.
+# Must come after oh-my-zsh.sh, which is what defines the original.
+if typeset -f prompt_segment >/dev/null; then
+  prompt_dir() { prompt_segment cyan black '%3~'; }
+fi
+
 # --- Tool activation ---------------------------------------------------------
 # The shims on PATH (see .zshenv) already resolve mise-managed tools everywhere.
 # `activate` additionally keeps the environment in sync as you cd between
