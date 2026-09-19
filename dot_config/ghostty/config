@@ -29,6 +29,14 @@ scrollback-limit = 10000000
 mouse-hide-while-typing = true
 copy-on-select = clipboard
 confirm-close-surface = false
+
+# Restore windows, tabs, splits, geometry and per-surface working directories
+# across a quit. macOS-only: Ghostty drives NSQuitAlwaysKeepsWindows and AppKit
+# writes to ~/Library/Saved Application State/com.mitchellh.ghostty.savedState.
+# `always` is required -- the `default` value only restores after a force quit
+# or app-initiated relaunch (e.g. a Sparkle auto-update), not a normal Cmd+Q.
+# Working-directory restore depends on the shell integration configured below.
+# Not restored: scrollback and anything that was running in the pane.
 window-save-state = always
 
 # Open new tabs/splits in the current directory rather than $HOME.
